@@ -9,7 +9,7 @@ from bot.handlers.rooms import request_room_number_handler, get_room_number_hand
 from bot.handlers.things import thing_handler, another_handler
 from bot.handlers.users import staffs_handler
 from bot.models.things import Thing
-from bot.handlers.main import start_handler, test_handler
+from bot.handlers.main import start_handler
 from bot.handlers.solveproblems import done_problems_handler, problem_solved_button_handler
 
 load_dotenv()
@@ -24,7 +24,6 @@ async def main():
     bot = Bot(token)
     dp = Dispatcher()
 
-    dp.message.register(test_handler, Command(commands='test'))
     dp.message.register(start_handler, Command(commands='start'))
     dp.message.register(staffs_handler, Command(commands='staffs'))
     dp.message.register(request_room_number_handler, lambda message: message.text == 'S|P')
