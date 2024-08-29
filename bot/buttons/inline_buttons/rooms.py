@@ -5,6 +5,7 @@ from bot.api.rooms import rooms_list
 
 def rooms_list_buttons(page: int = 1):
     rooms = rooms_list()
+    print(rooms)
     start_index = (page - 1) * 10
     end_index = min(start_index + 10, len(rooms))
 
@@ -49,3 +50,4 @@ def rooms_list_buttons(page: int = 1):
             )
         )
         return builder.as_markup()
+    return builder.as_markup()
