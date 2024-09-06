@@ -26,7 +26,7 @@ async def main():
 
     dp.message.register(start_handler, Command(commands='start'))
     dp.message.register(staffs_handler, Command(commands='staffs'))
-    dp.message.register(request_room_number_handler, lambda message: message.text == 'S|P')
+    dp.message.register(request_room_number_handler, lambda message: message.text == 'Muammolar')
     dp.message.register(another_handler, Thing.another)
     dp.callback_query.register(get_room_number_handler, Thing.room)
     dp.callback_query.register(thing_handler, Thing.things)

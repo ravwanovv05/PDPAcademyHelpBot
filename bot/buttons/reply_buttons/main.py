@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
 def main_buttons():
-    keyboard_problem = KeyboardButton(text='S|P')
+    keyboard_problem = KeyboardButton(text='Muammolar')
 
     builder = ReplyKeyboardBuilder()
     builder.add(keyboard_problem)
