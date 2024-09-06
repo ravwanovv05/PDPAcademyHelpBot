@@ -1,6 +1,8 @@
 import os
 from aiogram import types, Bot
 from aiogram.fsm.context import FSMContext
+
+from bot.api.users import user_detail
 from bot.buttons.inline_buttons.solveproblems import done_button1
 from bot.models.things import Thing
 
@@ -38,7 +40,7 @@ async def thing_handler(query: types.CallbackQuery, bot: Bot, state: FSMContext)
             if query.data.split('_')[1] not in data['things']['telegram_ids']:
                 data['things']['responsible_users'].append(
                     {
-                        'first_name': query.data.split('_')[-1],
+                        'first_name': user_detail(int(query.data.split('_')[-1]))['first_name'],
                         'telegram_id': query.data.split('_')[1]
                     }
                 )
@@ -50,7 +52,7 @@ async def thing_handler(query: types.CallbackQuery, bot: Bot, state: FSMContext)
                     'things': [query.data.split('_')[0]],
                     'responsible_users': [
                         {
-                            'first_name': query.data.split('_')[-1],
+                            'first_name': user_detail(int(query.data.split('_')[-1]))['first_name'],
                             'telegram_id': query.data.split('_')[1],
                          }
                     ],

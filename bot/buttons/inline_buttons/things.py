@@ -12,17 +12,17 @@ def things_buttons():
     for thing in things:
         user = user_detail(int(thing['responsible_user']))
         button = InlineKeyboardButton(
-            text=thing['name'], callback_data=f"{thing['name']}_{user['telegram_id']}_{user['first_name']}"
+            text=thing['name'], callback_data=f"{thing['name']}_{user['telegram_id']}_{thing['responsible_user']}"
         )
 
         c += 1
-        if c != 1 and c % 2 != 0:
+        if c % 2 != 0:
             builder.row(button)
         else:
             builder.add(button)
 
     done_button = InlineKeyboardButton(text='Tasdiqlash ✅', callback_data='done')
     another_button = InlineKeyboardButton(text='Boshqalar', callback_data='another')
-    builder.row(another_button, done_button)
+    builder.row(another_button).add(done_button)
 
     return builder.as_markup()
