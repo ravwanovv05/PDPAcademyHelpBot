@@ -30,8 +30,8 @@ async def main():
     dp.message.register(another_handler, Thing.another)
     dp.callback_query.register(get_room_number_handler, Thing.room)
     dp.callback_query.register(thing_handler, Thing.things)
-    dp.callback_query.register(done_problems_handler, lambda query: query.data == 'do_it')
-    dp.callback_query.register(problem_solved_button_handler, lambda query: query.data == 'in_process')
+    dp.callback_query.register(done_problems_handler, lambda query: query.data.startswith('do_it'))
+    dp.callback_query.register(problem_solved_button_handler, lambda query: query.data.startswith('in_process'))
 
     try:
         await dp.start_polling(bot)

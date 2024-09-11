@@ -2,8 +2,8 @@ from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-def done_button1():
-    button1 = InlineKeyboardButton(text='Bajarish', callback_data='do_it')
+def done_button1(telegram_id: list):
+    button1 = InlineKeyboardButton(text='Bajarish', callback_data=f"do_it_{telegram_id}")
 
     builder = InlineKeyboardBuilder()
     builder.add(button1)
@@ -11,8 +11,8 @@ def done_button1():
     return builder.as_markup()
 
 
-def in_process_button():
-    button1 = InlineKeyboardButton(text='Jarayonda...', callback_data='in_process')
+def in_process_button(telegram_id: list):
+    button1 = InlineKeyboardButton(text='Jarayonda...', callback_data=f"in_process_{telegram_id}")
 
     builder = InlineKeyboardBuilder()
     builder.add(button1)

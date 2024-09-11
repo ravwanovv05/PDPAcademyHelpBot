@@ -20,15 +20,16 @@ async def thing_handler(query: types.CallbackQuery, bot: Bot, state: FSMContext)
                 text += thing + ', '
             else:
                 text += thing
-
+        telegram_ids = []
         for responsible_user in responsible_users:
             text += ' \n' + f"[{responsible_user['first_name']}](tg://user?id={responsible_user['telegram_id']})"
+            telegram_ids.append(responsible_user['telegram_id'])
 
         group_id = os.getenv('GROUP_ID')
 
         await state.clear()
         await query.message.delete()
-        await bot.send_message(group_id, text, reply_markup=done_button1(), parse_mode='Markdown')
+        await bot.send_message(group_id, text, reply_markup=done_button1(telegram_ids), parse_mode='Markdown')
         await bot.send_message(query.from_user.id, 'Muammolar tez orada bartaraf etiladi!')
     elif query.data == 'another':
         await state.set_state(Thing.another)
