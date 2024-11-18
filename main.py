@@ -9,13 +9,13 @@ from bot.handlers.rooms import request_room_number_handler, get_room_number_hand
 from bot.handlers.things import thing_handler, another_handler
 from bot.handlers.users import staffs_handler
 from bot.models.things import Thing
-from bot.handlers.main import start_handler
+from bot.handlers.main import start_handler, chat_member
 from bot.handlers.solveproblems import done_problems_handler, problem_solved_button_handler
 
 load_dotenv()
 
 
-token = os.getenv('BOT_TOKEN')
+token = os.getenv('TOKEN')
 
 
 async def main():
@@ -32,6 +32,8 @@ async def main():
     dp.callback_query.register(thing_handler, Thing.things)
     dp.callback_query.register(done_problems_handler, lambda query: query.data.startswith('do_it'))
     dp.callback_query.register(problem_solved_button_handler, lambda query: query.data.startswith('in_process'))
+
+    dp.my_chat_member.register(chat_member)
 
     try:
         await dp.start_polling(bot)

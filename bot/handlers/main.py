@@ -1,8 +1,9 @@
-from aiogram import types
+from aiogram import types, Bot
 from dotenv import load_dotenv
 from bot.api.users import create_user
 from bot.buttons.reply_buttons.main import main_buttons
 from bot.utils.users import read_file, write_file
+import logging
 
 load_dotenv()
 
@@ -33,3 +34,14 @@ async def start_handler(message: types.Message):
         text = 'Assalomu Aleykum, xush kelibsiz, nima kerak bo\'lsa shu tugmani bosing 👇🏻'
 
         await message.answer(text, reply_markup=main_buttons())
+
+
+async def chat_member(update: types.ChatMemberUpdated, bot: Bot):
+
+    if update.new_chat_member.status in ['member', 'administrator']:
+        chat_id = update.chat.id
+        chat_title = update.chat.title or 'Unnamed Group'
+
+        logging.info(f'Bot added to group: {chat_title} (ID: {chat_id})')
+
+        await bot.send_message(chat_id, 'Thank you for adding me to this group!')
